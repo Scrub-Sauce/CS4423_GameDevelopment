@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class SuperCoin : MonoBehaviour
 {   
+    public int value = 300;
+
+    public GameObject score;
+    public Score scoreComponent;
+
+    void Awake(){
+        score = GameObject.FindGameObjectWithTag("Score");
+        scoreComponent = score.GetComponent<Score>();
+    }
+
     void Update(){
 
         // Garbage Collection
@@ -16,6 +26,7 @@ public class SuperCoin : MonoBehaviour
         if(other.GetComponent<PlayerCreature>() != null){
             Debug.Log("Coin Found Creature!");
             Destroy(this.gameObject);
+            scoreComponent.addCoin(value);
         }
     }
 }

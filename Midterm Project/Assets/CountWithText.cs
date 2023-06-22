@@ -6,18 +6,15 @@ using UnityEngine;
 public class CountWithText : MonoBehaviour
 {
     Text clock;
-    int counter = 0;
+    public static int counter = 0;
 
     void Awake(){
         clock = GetComponent<Text>();
         StartCoroutine(CountEverySecond());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // counter += 1;
-        // clock.text = counter.ToString();
+    void Start(){
+        counter = 0;
     }
 
     IEnumerator CountEverySecond(){
