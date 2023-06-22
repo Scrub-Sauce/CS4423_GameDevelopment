@@ -9,32 +9,38 @@ public class Stopper : MonoBehaviour
 {   
     public GameObject score;
     public Score scoreComponent;
+    AudioSource sound;
 
     void Awake(){
         score = GameObject.FindGameObjectWithTag("Score");
         scoreComponent = score.GetComponent<Score>();
+        sound = GetComponent<AudioSource>();
     }
 
     void Update(){
-
         // Garbage Collection
-        if((this.transform.position.y < -8) && !(this.transform.position.x < -9)){
+        if((this.transform.position.y < -40)){
             Destroy(this.gameObject);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other){
         if(other.GetComponent<PlayerCreature>() != null){
-            StopAllCoroutines();
-            SceneManager.LoadScene("GameOver");
+            StartCoroutine(endSequence());
         }
 
         if(other.GetComponent<Laser>() != null){
-            Debug.Log("BOOM!");
             Destroy(other.gameObject);
             Destroy(this.gameObject);
             scoreComponent.laserFee();
         }
+    }        
+
+    IEnumerator endSequence(){
+        sound.Play();
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("GameOver");
+           
     }
 }
 

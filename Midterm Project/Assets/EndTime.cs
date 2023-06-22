@@ -11,6 +11,7 @@ public class EndTime : MonoBehaviour
     void Awake(){
         timeValue = CountWithText.counter;
         time = GetComponent<Text>();
+        StopAllCoroutines();
     }
 
     // Start is called before the first frame update
