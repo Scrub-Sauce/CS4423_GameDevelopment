@@ -12,11 +12,6 @@ public class CountWithText : MonoBehaviour
         clock = GetComponent<Text>();
         StartCoroutine(CountEverySecond());
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock.text = "1";
-    }
 
     // Update is called once per frame
     void Update()
@@ -29,7 +24,7 @@ public class CountWithText : MonoBehaviour
         while(true){
             yield return new WaitForSeconds(1);
             counter += 1;
-            clock.text = counter.ToString();
+            clock.text = "Time: " + counter.ToString();
         }
     }
 }

@@ -8,7 +8,7 @@ public class Stopper : MonoBehaviour
     void Update(){
 
         // Garbage Collection
-        if((this.transform.position.y < -5) && !(this.transform.position.x < -9)){
+        if((this.transform.position.y < -8) && !(this.transform.position.x < -9)){
             Destroy(this.gameObject);
         }
     }
