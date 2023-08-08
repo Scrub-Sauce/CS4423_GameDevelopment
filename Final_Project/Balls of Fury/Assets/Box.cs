@@ -45,7 +45,7 @@ public class Box : MonoBehaviour
 
     void NextLevel(){
         Vector3 startingPos = transform.position;
-        Vector3 targetPos = new Vector3(startingPos.x, (startingPos.y - 0.88f), startingPos.z);
+        Vector3 targetPos = new Vector3(startingPos.x, (startingPos.y - 0.94f), startingPos.z);
         transform.position = targetPos;
     }
 
@@ -53,5 +53,11 @@ public class Box : MonoBehaviour
         float colorValue = Mathf.Clamp01((float) hitCounter / maxColorHit);
         Color newColor = colorGradient.Evaluate(colorValue);
         spriteRenderer.color = newColor; 
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(other.GetComponent<Ball>() != null){
+            this.hitCounter -= 1;
+        }
     }
 }

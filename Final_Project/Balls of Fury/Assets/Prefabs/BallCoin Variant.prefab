@@ -56,7 +56,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BallCoin Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6035686364057399134, guid: eb661ca773b792d46ad50fc18f9f58ad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -40,7 +40,7 @@ public class ImageFader : MonoBehaviour
             image.color = new Color(0,0,0,(timer/fadeTime));
             yield return null;
         }
-        image.color = Color.clear;
+        image.color = Color.black;
 
         yield return null;
         }

@@ -30,7 +30,7 @@ public class BallCoin : MonoBehaviour
     void NextLevel()
     {
         Vector3 startingPos = transform.position;
-        Vector3 targetPos = new Vector3(startingPos.x, (startingPos.y - 0.88f), startingPos.z);
+        Vector3 targetPos = new Vector3(startingPos.x, (startingPos.y - 0.94f), startingPos.z);
         transform.position = targetPos;
     }
 }
