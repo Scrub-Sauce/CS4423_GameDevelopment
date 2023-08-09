@@ -46,7 +46,9 @@ public class ObjectSpawner : MonoBehaviour
     IEnumerator LaunchBalls(Vector3 direction){
         for (int i = 0; i < gameController.ballCount -1; i++)
         {
-            GameObject newBall = Instantiate(ballPrefab, gameController.ballStartPos, Quaternion.identity);
+            GameObject newBall = BallPoolManager.Instance.GetBall();
+            newBall.transform.position = gameController.ballStartPos;
+            newBall.SetActive(true);
             newBall.GetComponent<Rigidbody2D>().velocity = direction * speed;
             yield return new WaitForSeconds(0.1f);
         }

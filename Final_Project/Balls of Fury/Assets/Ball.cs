@@ -80,19 +80,21 @@ public class Ball : MonoBehaviour
             if (!gameController.ballPosFound){
                 gameController.UpdateBallPos(new Vector3(transform.position.x, -4.35f, 0));
             }else{
-                Destroy(this.gameObject);
+                BallPoolManager.Instance.ReturnBall(this.gameObject);
             }
         }
 
         if(this.transform.position.y > 6.0f || this.transform.position.x > 10.0f || this.transform.position.x < -10.0f){
-            Destroy(this.gameObject);
+            BallPoolManager.Instance.ReturnBall(this.gameObject);
         }
     }
 
     IEnumerator LaunchBalls(Vector3 direction){
         for (int i = 0; i < gameController.ballCount -1; i++)
         {
-            GameObject newBall = Instantiate(ballPrefab, gameController.ballStartPos, Quaternion.identity);
+            GameObject newBall = BallPoolManager.Instance.GetBall();
+            newBall.transform.position = gameController.ballStartPos;
+            newBall.SetActive(true);
             Rigidbody2D newRB = newBall.GetComponent<Rigidbody2D>();
             newRB.gravityScale = 0.01f;
             newRB.velocity = direction * speed;
