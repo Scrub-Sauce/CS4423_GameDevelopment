@@ -22,19 +22,6 @@ public class Ball : MonoBehaviour
         lineRenderer.endWidth = 0.05f;   
     }
 
-    void Update(){
-        HandleInput();
-        if (transform.position.y <= -4.5f){
-            rb.velocity = Vector2.zero; 
-            if (!gameController.ballPosFound){
-                gameController.UpdateBallPos(new Vector3(transform.position.x, -4, 0));
-            }else{
-                Destroy(this.gameObject);
-                gameController.activeBallCount -= 1;
-            }
-        }
-    }
-
     void OnTriggerEnter2D(Collider2D collider){
         if (collider.gameObject.name == "TopBoundary"){
             ReflectBall(Vector2.down);
@@ -44,6 +31,15 @@ public class Ball : MonoBehaviour
             ReflectBall(Vector2.left);
         }else if(collider.gameObject.name == "PlayerBumper"){
             ReflectBall(Vector2.up);
+        }else if(collider.CompareTag("Box")){
+            Vector3 boxPos = collider.transform.position;
+            Vector3 ballPos = this.transform.position;
+
+            if (boxPos.x < ballPos.x){
+                ReflectBall(Vector2.up);
+            }else if(boxPos.x > ballPos.x){
+                ReflectBall(Vector2.down);
+            }
         }
     }
 
@@ -81,18 +77,32 @@ public class Ball : MonoBehaviour
         }  
     }
 
-    void OnCollisionEnter2D(Collision2D collision){
-        if (collision.gameObject.CompareTag("Box")){
-            Vector2 collisionDirection = transform.position - collision.gameObject.transform.position;
+    void OnCollisionEnter2D(Collision2D col){
+        // if (collision.gameObject.CompareTag("Box")){
+        //     Vector2 collisionDirection = transform.position - collision.gameObject.transform.position;
 
-            float horizontalImpact = Mathf.Abs(collisionDirection.x);
-            float verticalImpact = Mathf.Abs(collisionDirection.y);
+        //     float horizontalImpact = Mathf.Abs(collisionDirection.x);
+        //     float verticalImpact = Mathf.Abs(collisionDirection.y);
 
-            if (horizontalImpact > verticalImpact){
-                ReflectBall(Vector2.right * Mathf.Sign(collisionDirection.x));
-            }
-            else{
-                ReflectBall(Vector2.up * Mathf.Sign(collisionDirection.y));
+        //     if (horizontalImpact > verticalImpact){
+        //         ReflectBall(Vector2.right * Mathf.Sign(collisionDirection.x));
+        //     }
+        //     else{
+        //         ReflectBall(Vector2.up * Mathf.Sign(collisionDirection.y));
+        //     }
+        // }
+        Debug.Log("Collided!");
+    }
+
+    void Update(){
+        HandleInput();
+        if (transform.position.y <= -4.5f){
+            rb.velocity = Vector2.zero; 
+            if (!gameController.ballPosFound){
+                gameController.UpdateBallPos(new Vector3(transform.position.x, -4, 0));
+            }else{
+                Destroy(this.gameObject);
+                gameController.activeBallCount -= 1;
             }
         }
     }

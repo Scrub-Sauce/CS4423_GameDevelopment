@@ -34,6 +34,8 @@ public class Box : MonoBehaviour
             NextLevel();
         }
 
+        counterLabel.text = hitCounter.ToString();
+
         if (transform.position.y < -3.38f){
             // gameController.GameOver();
         }
