@@ -22,27 +22,6 @@ public class Ball : MonoBehaviour
         lineRenderer.endWidth = 0.05f;   
     }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        if (collider.gameObject.name == "TopBoundary"){
-            ReflectBall(Vector2.down);
-        }else if (collider.gameObject.name == "LeftBoundary"){
-            ReflectBall(Vector2.right);
-        }else if(collider.gameObject.name == "RightBoundary"){
-            ReflectBall(Vector2.left);
-        }else if(collider.gameObject.name == "PlayerBumper"){
-            ReflectBall(Vector2.up);
-        }else if(collider.CompareTag("Box")){
-            Vector3 boxPos = collider.transform.position;
-            Vector3 ballPos = this.transform.position;
-
-            if (boxPos.x < ballPos.x){
-                ReflectBall(Vector2.up);
-            }else if(boxPos.x > ballPos.x){
-                ReflectBall(Vector2.down);
-            }
-        }
-    }
-
     void ReflectBall(Vector2 normal){
         rb.velocity = Vector2.Reflect(rb.velocity, normal);
     }
@@ -77,21 +56,14 @@ public class Ball : MonoBehaviour
         }  
     }
 
-    void OnCollisionEnter2D(Collision2D col){
-        // if (collision.gameObject.CompareTag("Box")){
-        //     Vector2 collisionDirection = transform.position - collision.gameObject.transform.position;
-
-        //     float horizontalImpact = Mathf.Abs(collisionDirection.x);
-        //     float verticalImpact = Mathf.Abs(collisionDirection.y);
-
-        //     if (horizontalImpact > verticalImpact){
-        //         ReflectBall(Vector2.right * Mathf.Sign(collisionDirection.x));
-        //     }
-        //     else{
-        //         ReflectBall(Vector2.up * Mathf.Sign(collisionDirection.y));
-        //     }
-        // }
-        Debug.Log("Collided!");
+    void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.CompareTag("Box")){
+            Box boxComponent = collision.gameObject.GetComponent<Box>();
+            boxComponent.hitCounter -= 1;
+        }
+        else if (collision.gameObject.CompareTag("Ball")) {
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider, true);
+        }
     }
 
     void Update(){
@@ -117,7 +89,7 @@ public class Ball : MonoBehaviour
     }
 
     IEnumerator LaunchAfterDelay(float seconds, Vector3 direction){
-    yield return new WaitForSeconds(seconds);
-    StartCoroutine(LaunchBalls(direction));
-}
+        yield return new WaitForSeconds(seconds);
+        StartCoroutine(LaunchBalls(direction));
+    }
 }

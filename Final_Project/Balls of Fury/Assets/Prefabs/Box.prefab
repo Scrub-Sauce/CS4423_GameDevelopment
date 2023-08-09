@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8106788295844397647}
   - component: {fileID: 5407128212824518198}
   - component: {fileID: 9048953349164900443}
-  - component: {fileID: 3531159518346623177}
+  - component: {fileID: 688534188318638580}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
@@ -177,7 +177,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 4210050440351056197}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 57644bd59d7f7bc4d80b61933d7a85a4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterLabel: {fileID: 2672339189918477988}
+  hitCounter: 0
   colorGradient:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0, a: 1}
@@ -256,7 +257,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
---- !u!50 &3531159518346623177
+--- !u!50 &688534188318638580
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -268,7 +269,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

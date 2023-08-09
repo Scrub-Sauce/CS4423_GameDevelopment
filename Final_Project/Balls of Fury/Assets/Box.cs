@@ -8,7 +8,7 @@ public class Box : MonoBehaviour
     GameController gameController;
     public Text counterLabel;
 
-    int hitCounter;
+    public int hitCounter;
     int previousLevel;
 
     [SerializeField] private Gradient colorGradient;
@@ -36,8 +36,8 @@ public class Box : MonoBehaviour
 
         counterLabel.text = hitCounter.ToString();
 
-        if (transform.position.y < -3.38f){
-            // gameController.GameOver();
+        if (transform.position.y < -3.0f){
+            Debug.Log("Game Over");
         }
 
         if (hitCounter <= 0){
@@ -55,11 +55,5 @@ public class Box : MonoBehaviour
         float colorValue = Mathf.Clamp01((float) hitCounter / maxColorHit);
         Color newColor = colorGradient.Evaluate(colorValue);
         spriteRenderer.color = newColor; 
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("Ball")){
-            this.hitCounter -= 1;
-        }
     }
 }
