@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; } 
 
+    public ImageFader image;
     public ObjectSpawner objectSpawner;
     public Text levelLabel, ballLabel;
     public int level;
@@ -16,6 +18,7 @@ public class GameController : MonoBehaviour
     public bool ballPosFound = false;
     public int activeBallCount;
     public bool ballsLaunched;
+    bool changingScene = false;
 
     private void Awake()
     {
@@ -33,7 +36,7 @@ public class GameController : MonoBehaviour
         level = 1;
         ballCount = 1;
         previousLevel = level;
-        ballStartPos = new Vector3(0, -4, 0);
+        ballStartPos = new Vector3(0, -4.35f, 0);
         objectSpawner.NextLevel();
         ballsLaunched = false;
         
@@ -42,6 +45,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        activeBallCount = GameObject.FindGameObjectsWithTag("Ball").Length;
         if (activeBallCount == 0 && ballsLaunched && ballPosFound){
             level++;
         }
@@ -56,9 +60,24 @@ public class GameController : MonoBehaviour
         ballLabel.text = "x " + ballCount.ToString();
     }
 
+    public void GameOver(){
+        if (changingScene){
+            return;
+        }
+        changingScene = true;
+
+        StartCoroutine(ChangeSceneRoutine());
+        IEnumerator ChangeSceneRoutine()
+        {
+            image.FadeToBlack();
+            yield return new WaitForSeconds(image.fadeTime);
+            SceneManager.LoadScene("GameOver");
+            yield return null;
+        }
+    }
+
     public void UpdateBallPos(Vector3 pos){
         ballStartPos = pos;
         ballPosFound = true;
-        Debug.Log("Ball Pos = " + ballStartPos);
     }
 }

@@ -35,8 +35,10 @@ public class BallCoin : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
+        GameObject sound = GameObject.FindWithTag("BallSound");
         if (other.gameObject.GetComponent<Ball>() != null){
             gameController.ballCount += 1;
+            sound.GetComponent<AudioSource>().Play();
             Destroy(this.gameObject);
         }
     }

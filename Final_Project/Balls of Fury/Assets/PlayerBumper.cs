@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBumper : MonoBehaviour
 {
 
-    private float speed = 12.0f;
+    private float speed = 20.0f;
 
     private Rigidbody2D rb;
     

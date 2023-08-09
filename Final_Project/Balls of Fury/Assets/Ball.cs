@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
     public GameController gameController;
     Vector3 pressPos;
     Rigidbody2D rb;
-    float speed = 13f;
+    float speed = 10f;
     LineRenderer lineRenderer;
     float lineDistanceMultiplier = 3f;
     public GameObject ballPrefab;
@@ -50,6 +50,7 @@ public class Ball : MonoBehaviour
                 direction.Normalize();
                 gameController.ballsLaunched = true;
                 rb.velocity = direction * speed;
+                rb.gravityScale = 0.01f;
                 StartCoroutine(LaunchAfterDelay(0.1f, direction));
                 lineRenderer.positionCount = 0;
             }
@@ -57,25 +58,27 @@ public class Ball : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision){
+
+        this.gameObject.GetComponent<AudioSource>().Play();
         if (collision.gameObject.CompareTag("Box")){
             Box boxComponent = collision.gameObject.GetComponent<Box>();
             boxComponent.hitCounter -= 1;
-        }
-        else if (collision.gameObject.CompareTag("Ball")) {
-            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider, true);
         }
     }
 
     void Update(){
         HandleInput();
-        if (transform.position.y <= -4.5f){
+        if (transform.position.y <= -5.0f){
             rb.velocity = Vector2.zero; 
             if (!gameController.ballPosFound){
-                gameController.UpdateBallPos(new Vector3(transform.position.x, -4, 0));
+                gameController.UpdateBallPos(new Vector3(transform.position.x, -4.35f, 0));
             }else{
                 Destroy(this.gameObject);
-                gameController.activeBallCount -= 1;
             }
+        }
+
+        if(this.transform.position.y > 6.0f || this.transform.position.x > 10.0f || this.transform.position.x < -10.0f){
+            Destroy(this.gameObject);
         }
     }
 
@@ -83,7 +86,9 @@ public class Ball : MonoBehaviour
         for (int i = 0; i < gameController.ballCount -1; i++)
         {
             GameObject newBall = Instantiate(ballPrefab, gameController.ballStartPos, Quaternion.identity);
-            newBall.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            Rigidbody2D newRB = newBall.GetComponent<Rigidbody2D>();
+            newRB.gravityScale = 0.01f;
+            newRB.velocity = direction * speed;
             yield return new WaitForSeconds(0.1f);
         }
     }

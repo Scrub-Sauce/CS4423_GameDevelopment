@@ -13,11 +13,14 @@ public class Box : MonoBehaviour
 
     [SerializeField] private Gradient colorGradient;
     SpriteRenderer spriteRenderer;
-    int maxColorHit = 500;
+    int maxColorHit = 100;
+
+    void Awake(){
+        gameController = GameController.Instance;
+    }
 
     // Start is called before the first frame update
     void Start(){
-        gameController = FindObjectOfType<GameController>();
         previousLevel = gameController.level;
         hitCounter = Random.Range(gameController.level, ((gameController.level * 2) + 1));
         counterLabel.text = hitCounter.ToString();
@@ -36,8 +39,8 @@ public class Box : MonoBehaviour
 
         counterLabel.text = hitCounter.ToString();
 
-        if (transform.position.y < -3.0f){
-            Debug.Log("Game Over");
+        if (transform.position.y < -3.8f){
+            gameController.GameOver();
         }
 
         if (hitCounter <= 0){
