@@ -33,4 +33,11 @@ public class BallCoin : MonoBehaviour
         Vector3 targetPos = new Vector3(startingPos.x, (startingPos.y - 0.94f), startingPos.z);
         transform.position = targetPos;
     }
+
+    void OnTriggerEnter2D(Collider2D other){
+        if (other.gameObject.GetComponent<Ball>() != null){
+            gameController.ballCount += 1;
+            Destroy(this.gameObject);
+        }
+    }
 }

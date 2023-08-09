@@ -56,7 +56,7 @@ public class Box : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.GetComponent<Ball>() != null){
+        if(other.CompareTag("Ball")){
             this.hitCounter -= 1;
         }
     }
