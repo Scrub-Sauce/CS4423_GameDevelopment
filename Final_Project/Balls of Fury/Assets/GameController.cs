@@ -37,9 +37,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((Input.GetKeyDown(KeyCode.Space))){
-            level += 1;  
-        }
         activeBallCount = GameObject.FindGameObjectsWithTag("Ball").Length;
         if (activeBallCount == 0 && ballsLaunched && ballPosFound){
             level++;

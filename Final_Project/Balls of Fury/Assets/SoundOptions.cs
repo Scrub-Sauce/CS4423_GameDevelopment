@@ -16,11 +16,11 @@ public class SoundOptions : MonoBehaviour
         if(PlayerPrefs.GetInt("set default volume") != 1){
             PlayerPrefs.SetInt("set default volume", 1);
             masterVol.value = 0.3f;
-            PlayerPrefs.SetFloat("master volume", 0.3f);
+            PlayerPrefs.SetFloat("master volume", 0.1f);
             musicVol.value = 0.3f;
-            PlayerPrefs.SetFloat("music volume", 0.3f);
+            PlayerPrefs.SetFloat("music volume", 0.1f);
             sfxVol.value = 0.3f;
-            PlayerPrefs.SetFloat("sfx volume", 0.3f);
+            PlayerPrefs.SetFloat("sfx volume", 0.1f);
         }else{
             masterVol.value = PlayerPrefs.GetFloat("master volume");
             musicVol.value = PlayerPrefs.GetFloat("music volume");
