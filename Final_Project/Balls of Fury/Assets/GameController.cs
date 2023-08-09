@@ -31,20 +31,15 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
             return;  
-        }
-
-        level = 1;
-        ballCount = 1;
-        previousLevel = level;
-        ballStartPos = new Vector3(0, -4.35f, 0);
-        objectSpawner.NextLevel();
-        ballsLaunched = false;
-        
+        }        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if((Input.GetKeyDown(KeyCode.Space))){
+            level += 1;  
+        }
         activeBallCount = GameObject.FindGameObjectsWithTag("Ball").Length;
         if (activeBallCount == 0 && ballsLaunched && ballPosFound){
             level++;
@@ -80,4 +75,38 @@ public class GameController : MonoBehaviour
         ballStartPos = pos;
         ballPosFound = true;
     }
+
+    public void ResetGame(){
+        image = GameObject.FindGameObjectWithTag("ImageFader").GetComponent<ImageFader>();
+        levelLabel = GameObject.FindGameObjectWithTag("Level").GetComponent<Text>();
+        ballLabel = GameObject.FindGameObjectWithTag("BallCount").GetComponent<Text>();
+        objectSpawner = GameObject.FindGameObjectWithTag("ObjectSpawner").GetComponent<ObjectSpawner>();
+
+        changingScene = false;
+        level = 1;
+        ballCount = 1;
+        previousLevel = level;
+        ballStartPos = new Vector3(0, -4.35f, 0);
+        objectSpawner.NextLevel();
+        ballsLaunched = false;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Game")
+        {
+            ResetGame();
+        }
+    }
+    
 }

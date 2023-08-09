@@ -451,10 +451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1cd9064891ca8c40a08332cbcc13869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1334582960}
-  objectSpawner: {fileID: 561967237}
-  levelLabel: {fileID: 1904700239}
-  ballLabel: {fileID: 832624932}
+  image: {fileID: 0}
+  objectSpawner: {fileID: 0}
+  levelLabel: {fileID: 0}
+  ballLabel: {fileID: 0}
   level: 0
   ballCount: 0
   ballStartPos: {x: 0, y: 0, z: 0}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 561967237}
   m_Layer: 0
   m_Name: ObjectSpawner
-  m_TagString: Untagged
+  m_TagString: ObjectSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a238b73c2b068b41aa18855cabf9131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 473545270}
+  gameController: {fileID: 0}
   boxPrefab: {fileID: 4210050440351056197, guid: 9d36d84d1a0bd544592a810599afbaff, type: 3}
   ballCoinPrefab: {fileID: 4963775475303040646, guid: 06261274dc481774b94c1feac0195107, type: 3}
   ballPrefab: {fileID: 7730803879913795120, guid: a4ab5c493d86f104ab22fdbdbbabeb07, type: 3}
@@ -1062,7 +1062,7 @@ GameObject:
   - component: {fileID: 832624932}
   m_Layer: 5
   m_Name: BallCount
-  m_TagString: Untagged
+  m_TagString: BallCount
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1139,6 +1139,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2710195434012645620, guid: 4b781f02a1e6ae34299d4d1cf80759d7, type: 3}
       propertyPath: m_Name
+      value: ImageFader
+      objectReference: {fileID: 0}
+    - target: {fileID: 2710195434012645620, guid: 4b781f02a1e6ae34299d4d1cf80759d7, type: 3}
+      propertyPath: m_TagString
       value: ImageFader
       objectReference: {fileID: 0}
     - target: {fileID: 5050146912289576366, guid: 4b781f02a1e6ae34299d4d1cf80759d7, type: 3}
@@ -1440,17 +1444,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &1334582960 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4929999792944128159, guid: 4b781f02a1e6ae34299d4d1cf80759d7, type: 3}
-  m_PrefabInstance: {fileID: 1125572243}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b0d43093d326724ab9e1d507e7d995f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1660814242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,7 +1457,7 @@ GameObject:
   - component: {fileID: 1660814243}
   m_Layer: 0
   m_Name: EventSystem
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1519,6 +1512,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1696574318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4804994334888708129, guid: bb9791fbdb3d47f4c8308fa1c070cb04, type: 3}
+  m_PrefabInstance: {fileID: 6694593427826152539}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1334c399c1a79341b93013a4acb4cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1904700237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1536,7 @@ GameObject:
   - component: {fileID: 1904700239}
   m_Layer: 5
   m_Name: Level
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1673,9 +1677,13 @@ PrefabInstance:
       value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 3450331142021417611, guid: bb9791fbdb3d47f4c8308fa1c070cb04, type: 3}
+      propertyPath: bumper
+      value: 
+      objectReference: {fileID: 1696574318}
+    - target: {fileID: 3450331142021417611, guid: bb9791fbdb3d47f4c8308fa1c070cb04, type: 3}
       propertyPath: gameController
       value: 
-      objectReference: {fileID: 473545270}
+      objectReference: {fileID: 0}
     - target: {fileID: 5454627495148072857, guid: bb9791fbdb3d47f4c8308fa1c070cb04, type: 3}
       propertyPath: m_Name
       value: PlayerBumper

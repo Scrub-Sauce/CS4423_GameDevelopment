@@ -16,7 +16,7 @@ public class Box : MonoBehaviour
     int maxColorHit = 100;
 
     void Awake(){
-        gameController = GameController.Instance;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Start is called before the first frame update

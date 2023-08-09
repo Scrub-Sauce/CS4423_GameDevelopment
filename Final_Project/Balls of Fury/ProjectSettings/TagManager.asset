@@ -9,6 +9,10 @@ TagManager:
   - BallCoin
   - Bumper
   - BallSound
+  - BallCount
+  - Level
+  - ObjectSpawner
+  - ImageFader
   layers:
   - Default
   - TransparentFX

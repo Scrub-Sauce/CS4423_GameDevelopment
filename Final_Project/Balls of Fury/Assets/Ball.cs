@@ -40,7 +40,11 @@ public class Ball : MonoBehaviour
                 currentPos.z = 0;
                 Vector3 dragDirection = (pressPos - currentPos).normalized;
                 float lineLength = Vector3.Distance(currentPos, pressPos) * (lineDistanceMultiplier);
-                lineRenderer.SetPosition(1, transform.position + dragDirection * lineLength);
+                if (dragDirection.y >= 0){
+                    lineRenderer.SetPosition(1, transform.position + dragDirection * lineLength);
+                }else{
+                    lineRenderer.SetPosition(1,this.transform.position);
+                }
             }
 
             if (Input.GetMouseButtonUp(0)){
@@ -48,6 +52,9 @@ public class Ball : MonoBehaviour
                 releasePos.z = 0;
                 Vector3 direction = pressPos - releasePos;
                 direction.Normalize();
+                if(direction.y <= 0){
+                    return;
+                }
                 gameController.ballsLaunched = true;
                 rb.velocity = direction * speed;
                 rb.gravityScale = 0.01f;

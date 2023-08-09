@@ -13,6 +13,10 @@ public class ObjectSpawner : MonoBehaviour
     int maxBoxes = 19;
     float speed = 12.0f;
 
+    void Awake(){
+        gameController = GameController.Instance;
+    }
+
     public void NextLevel()
     {
         int boxCount = Random.Range(1, maxBoxes-1);

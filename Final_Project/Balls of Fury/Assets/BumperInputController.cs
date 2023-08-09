@@ -5,8 +5,6 @@ using UnityEngine;
 public class BumperInputController : MonoBehaviour
 {
     public PlayerBumper bumper;
-    public GameController gameController;
-    // Start is called before the first frame update
 
     void FixedUpdate(){
         if((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && (bumper.transform.position.x >= -7.75)){
@@ -19,8 +17,6 @@ public class BumperInputController : MonoBehaviour
     }
 
     void Update(){
-        if((Input.GetKeyDown(KeyCode.Space))){
-            gameController.level += 1;  
-        }
+        
     }
 }
