@@ -85,7 +85,7 @@ public class Ball : MonoBehaviour
         }
 
         if(this.transform.position.y > 6.0f || this.transform.position.x > 10.0f || this.transform.position.x < -10.0f){
-            BallPoolManager.Instance.ReturnBall(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 
